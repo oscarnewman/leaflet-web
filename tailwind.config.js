@@ -35,9 +35,59 @@ module.exports = {
 				full: '100%',
 			},
 		},
+		typography: theme => ({
+			dark: {
+				css: {
+					color: theme('colors.gray.100'),
+					a: {
+						color: theme('colors.green.500'),
+						'&:hover': {
+							color: theme('colors.green.500'),
+						},
+					},
+					'[class~="lead"]': {
+						color: theme('colors.gray.100'),
+					},
+
+					h1: {
+						color: theme('colors.gray.100'),
+					},
+					h2: {
+						color: theme('colors.gray.100'),
+					},
+					h3: {
+						color: theme('colors.gray.100'),
+					},
+					h4: {
+						color: theme('colors.gray.100'),
+					},
+					h5: {
+						color: theme('colors.gray.100'),
+					},
+					h6: {
+						color: theme('colors.gray.100'),
+					},
+
+					strong: {
+						color: theme('colors.gray.100'),
+					},
+
+					code: {
+						color: theme('colors.gray.100'),
+					},
+
+					figcaption: {
+						color: theme('colors.gray.500'),
+					},
+				},
+			},
+		}),
 	},
 	variants: {
 		borderWidth: ['hover'],
+		rotate: ['hover', 'group-hover'],
+		scale: ['hover', 'group-hover'],
+		typography: ['dark'],
 	},
 	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

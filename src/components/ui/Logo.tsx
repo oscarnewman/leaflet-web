@@ -25,7 +25,9 @@ export function Logo(props: StyleProps) {
 						<ellipse fill="url(#b)" cx="43.328" cy="58.828" rx="42.5" ry="43" />
 					</g>
 				</svg>
-				<p className="font-bold ml-2 text-xl text-gray-800">Leaflet</p>
+				<p className="font-bold ml-2 text-xl text-gray-800 dark:text-gray-200">
+					Leaflet
+				</p>
 			</a>
 		</Link>
 	)

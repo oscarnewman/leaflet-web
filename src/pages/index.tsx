@@ -3,8 +3,10 @@ import { getProperties } from '@/api/properties'
 import Nav from '@/components/Nav'
 import PropertyCard from '@/components/properties/PropertyCard'
 import Spinner from '@/components/ui/Spinner'
+import Stack from '@/components/ui/Stack'
 import { PaginatedResponse } from '@/types/api'
 import { Property } from '@/types/property'
+import { cx } from '@/utilities/classes'
 import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
@@ -15,26 +17,56 @@ function Home() {
 	>(['properties', {}], () => getProperties())
 
 	return (
-		<div>
-			<Nav />
+		<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<Stack space={16} className="pb-16">
+				<Nav />
 
-			<main className="container mx-auto">
-				<div className="prose mx-auto">
-					<h1>Find or Lease your Place</h1>
-					<p className="lead">
-						Need a place for the summer for yourself? For your friends? Search
-						and browse the list below to find available sublets near campus.
-					</p>
+				<div className="relative group">
+					<div className="bg-white dark:bg-gray-800 shadow-xl p-8 rounded-lg w-full relative z-30">
+						<div className="prose dark:prose-dark">
+							<h1>Find Your Perfect Place</h1>
+							<p className="lead">
+								Forget scrolling through Facebook groups. Filter for your needs
+								and price range and see everything at once.
+							</p>
+						</div>
+					</div>
+					<div
+						className={cx(
+							'absolute w-full h-full scale-105 top-0 left-0',
+							'bg-gradient-to-br from-orange-500 to-red-500',
+							'transform rotate-1 rounded-2xl shdaow-xl z-20',
+							' group-hover:scale-105 transition-transform'
+						)}
+					/>
+					<div
+						className={cx(
+							'absolute w-full h-full scale-110 top-0 left-0',
+							'bg-gradient-to-br from-orange-200 to-red-200',
+							'dark:from-orange-700 dark:to-red-700',
+							'transform -rotate-1 rounded-2xl shdaow-xl z-10',
+							'group-hover:rotate-1 group-hover:scale-105 transition-transform'
+						)}
+					/>
+					<div
+						className={cx(
+							'absolute w-full h-full scale-125 top-0 left-0',
+							'bg-gradient-to-br from-orange-100 to-red-100',
+							'dark:from-orange-900 dark:to-red-900',
+							'transform rotate-3 rounded-2xl shdaow-xl z-0',
+							'group-hover:rotate-1 group-hover:scale-105 transition-transform'
+						)}
+					/>
 				</div>
 				{status === 'loading' && <Spinner />}
 				{status === 'success' && (
-					<div className="grid grid-cols-5 gap-4">
+					<div className="grid grid-cols-3 gap-8">
 						{paginatedProperties.data.map(property => (
 							<PropertyCard key={property.id} property={property} />
 						))}
 					</div>
 				)}
-			</main>
+			</Stack>
 		</div>
 	)
 }

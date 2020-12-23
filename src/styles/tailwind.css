@@ -10,3 +10,6 @@
 	--theme-tertiary: theme('colors.yellow.100');
 }
 
+body {
+	@apply dark:bg-black;
+}
