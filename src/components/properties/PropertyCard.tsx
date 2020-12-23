@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Icon from '../ui/icons/Icon'
 
 type Props = {
+	/** The property to display */
 	property: Property
 }
 
