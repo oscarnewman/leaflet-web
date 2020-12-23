@@ -21,6 +21,7 @@
   "dependencies": {
     "@headlessui/react": "^0.2.0",
     "axios": "^0.21.0",
+    "camelcase-keys": "^6.2.2",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
     "framer-motion": "^2.9.5",
@@ -28,8 +29,7 @@
     "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-query": "^2.26.4",
-    "react-query-devtools": "^2.6.3"
+    "react-query": "^3.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",

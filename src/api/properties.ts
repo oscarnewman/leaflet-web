@@ -1,7 +1,6 @@
-import { parseISO } from 'date-fns'
-import { PaginatedResponse } from './../types/api'
 import { Property } from '@/types/property'
 import { useQuery } from 'react-query'
+import { PaginatedResponse } from './../types/api'
 import { client } from './client'
 import { getPaginatedData } from './pagination'
 
@@ -17,16 +16,12 @@ export interface PropertyQuery {
  * Queries all properties
  */
 export async function getProperties(query: PropertyQuery = {}) {
-	const results = await getPaginatedData<Property>(() =>
-		client.get('/properties', { params: { query } })
-	)
-
-	return results
+	const results = await client.get<PaginatedResponse<Property>>('/properties', {
+		params: { query },
+	})
+	return results.data
 }
 
-export function useProperties(query: PropertyQuery = {}) {
-	return useQuery<PaginatedResponse<Property>>(
-		['properties', query],
-		getProperties
-	)
+export async function getProperty(id: string) {
+	return (await client.get(`/properties/${id}`)).data
 }

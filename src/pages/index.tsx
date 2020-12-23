@@ -1,12 +1,19 @@
-import { getProperties, useProperties } from '@/api/properties'
+import { APIError } from '@/api/errors'
+import { getProperties } from '@/api/properties'
 import Nav from '@/components/Nav'
 import PropertyCard from '@/components/properties/PropertyCard'
-import { QueryCache } from 'react-query'
-import { dehydrate } from 'react-query/hydration'
 import Spinner from '@/components/ui/Spinner'
+import { PaginatedResponse } from '@/types/api'
+import { Property } from '@/types/property'
+import { QueryClient, useQuery } from 'react-query'
+import { dehydrate } from 'react-query/hydration'
 
 function Home() {
-	const { data: paginatedProperties, status } = useProperties()
+	const { data: paginatedProperties, status, error } = useQuery<
+		PaginatedResponse<Property>,
+		APIError
+	>(['properties', {}], () => getProperties())
+
 	return (
 		<div>
 			<Nav />
@@ -33,8 +40,8 @@ function Home() {
 }
 
 export async function getStaticProps() {
-	const queryClient = new QueryCache()
-	await queryClient.prefetchQuery(['properties', {}], getProperties)
+	const queryClient = new QueryClient()
+	await queryClient.prefetchQuery(['properties', {}], () => getProperties())
 
 	return {
 		props: {
