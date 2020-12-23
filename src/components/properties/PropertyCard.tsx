@@ -8,6 +8,9 @@ type Props = {
 	property: Property
 }
 
+/**
+ * A card to show a preivew of a property
+ */
 function PropertyCard({ property }: Props) {
 	return (
 		<Link href={`/property/${property.id}`}>
