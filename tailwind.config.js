@@ -1,4 +1,6 @@
+const colors = require('tailwindcss/colors')
 module.exports = {
+	darkMode: 'media',
 	future: {
 		removeDeprecatedGapUtilities: true,
 		purgeLayersByDefault: true,
@@ -15,6 +17,7 @@ module.exports = {
 	},
 	theme: {
 		extend: {
+			colors: { teal: colors.emerald, orange: colors.amber },
 			screens: {
 				'content-xs': '20rem',
 				'content-sm': '24rem',

@@ -1,6 +1,6 @@
 module.exports = {
 	images: {
-		domains: [''],
+		domains: ['via.placeholder.com'],
 		path: '/_next/image',
 		loader: 'default',
 	},
