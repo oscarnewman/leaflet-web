@@ -20,9 +20,9 @@ function PropertyCard({ property }: Props) {
 			<a className="rounded-lg overflow-hidden border-black border-2 dark:border-gray-800 dark:bg-gray-800 h-full flex flex-col justify-between">
 				<div>
 					<div className="w-full h-48 relative">
-						{property.images?.[0] ? (
+						{property.featuredImage ? (
 							<Image
-								src={property.images[0].url}
+								src={property.featuredImage.url}
 								layout="fill"
 								className="object-cover"
 								priority

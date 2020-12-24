@@ -5,6 +5,7 @@ import { client } from './client'
 import { getPaginatedData } from './pagination'
 
 export interface PropertyQuery {
+	page: number
 	bedrooms?: number
 	startDate?: Date
 	endDate?: Date
@@ -17,7 +18,7 @@ export interface PropertyQuery {
  */
 export async function getProperties(query: PropertyQuery = {}) {
 	const results = await client.get<PaginatedResponse<Property>>('/properties', {
-		params: { query },
+		params: { ...query },
 	})
 	return results.data
 }

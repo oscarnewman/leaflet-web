@@ -8,7 +8,8 @@ export interface Image {
 }
 export interface Property {
 	id: UUID
-	images: Image[]
+	images?: Image[]
+	featuredImage: Image
 	bedrooms: number
 	rent: number
 	area: string
