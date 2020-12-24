@@ -1,14 +1,16 @@
 import { APIError } from '@/api/errors'
 import { getProperties } from '@/api/properties'
-import TextInput from '@/components/form/TextInput'
 import Nav from '@/components/Nav'
 import PropertyCard from '@/components/properties/PropertyCard'
+import DateRangeInput from '@/components/ui/input/DateRangeInput'
+import TextField from '@/components/ui/input/TextField'
 import Pagination from '@/components/ui/Pagination'
 import Spinner from '@/components/ui/Spinner'
 import Stack from '@/components/ui/Stack'
 import { PaginatedResponse } from '@/types/api'
 import { Property } from '@/types/property'
 import { cx } from '@/utilities/classes'
+import { spawn } from 'child_process'
 import { useState } from 'react'
 import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
@@ -77,70 +79,46 @@ function Home() {
 					<Stack>
 						<div>
 							<div className="grid grid-cols-4 gap-8 pb-4">
-								<div>
-									<label
-										htmlFor="bedrooms"
-										className="block text-xs uppercase tracking-wide text-gray-700 font-medium mb-1"
-									>
-										Rooms
-									</label>
-									<input
-										type="number"
-										max="10"
-										className="form-input"
-										value={query.bedrooms}
-										onChange={e =>
-											setQuery({ ...query, bedrooms: e.target.value || null })
-										}
-										placeholder="Any"
-									/>
-								</div>
-								<div>
-									<label
-										htmlFor="dates"
-										className="block text-xs uppercase tracking-wide text-gray-700 font-medium mb-1"
-									>
-										Available
-									</label>
-									<select name="" id="dates" className="form-input">
-										<option value="1">Whenever</option>
-										<option value="1">1</option>
-									</select>
-								</div>
-								<div>
-									<label
-										htmlFor="people"
-										className="block text-xs uppercase tracking-wide text-gray-700 font-medium mb-1"
-									>
-										From
-									</label>
-									<input
-										type="number"
-										value={query.rentMin}
-										onChange={e =>
-											setQuery({ ...query, rentMin: e.target.value || null })
-										}
-										className="form-input"
-										placeholder="$0 /month"
-									/>
-								</div>
-								<div>
-									<label
-										htmlFor="people"
-										className="block text-xs uppercase tracking-wide text-gray-700 font-medium mb-1"
-									>
-										To
-									</label>
-									<input
-										type="number"
-										value={query.rentMax}
-										onChange={e =>
-											setQuery({ ...query, rentMax: e.target.value || null })
-										}
-										className="form-input"
-										placeholder="$0 /month"
-									/>
-								</div>
+								<TextField
+									title="Rooms"
+									name="bedrooms"
+									value={query.bedrooms}
+									onChange={bedrooms => setQuery({ ...query, bedrooms })}
+									placeholder="Any"
+								/>
+								<DateRangeInput
+									title="Available"
+									value={query}
+									onChange={newRange =>
+										setQuery({
+											...query,
+											startDate: newRange.startDate,
+											endDate: newRange.endDate,
+										})
+									}
+								/>
+								<TextField
+									title="From"
+									name="rentMin"
+									value={query.rentMin}
+									onChange={rentMin => setQuery({ ...query, rentMin })}
+									placeholder="0"
+									leadingSlot={<span className="text-sm text-gray-400">$</span>}
+									trailingSlot={
+										<span className="text-sm text-gray-400">per month</span>
+									}
+								/>
+								<TextField
+									title="To"
+									name="rentMax"
+									value={query.rentMax}
+									onChange={rentMax => setQuery({ ...query, rentMax })}
+									placeholder="Infinite"
+									leadingSlot={<span className="text-sm text-gray-400">$</span>}
+									trailingSlot={
+										<span className="text-sm text-gray-400">per month</span>
+									}
+								/>
 							</div>
 							{paginatedProperties && (
 								<Pagination
