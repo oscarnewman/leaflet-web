@@ -24,12 +24,15 @@
     "camelcase-keys": "^6.2.2",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
+    "formik": "^2.2.6",
     "framer-motion": "^2.9.5",
     "next": "10.0.3",
     "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-query": "^3.5.1"
+    "react-dropzone": "^11.2.4",
+    "react-query": "^3.5.1",
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",

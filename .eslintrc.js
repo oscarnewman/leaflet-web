@@ -5,6 +5,9 @@ module.exports = {
 		node: true,
 		jest: true,
 	},
+	globals: {
+		JSX: 'readonly',
+	},
 	extends: [
 		'plugin:react/recommended',
 		'standard',

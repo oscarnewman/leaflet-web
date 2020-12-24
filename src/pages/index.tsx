@@ -36,7 +36,7 @@ function Home() {
 							'absolute w-full h-full scale-105 top-0 left-0',
 							'bg-gradient-to-br from-orange-500 to-red-500',
 							'transform rotate-1 rounded-2xl shdaow-xl z-20',
-							' group-hover:scale-105 transition-transform'
+							' group-hover:scale-105 transition-transform pointer-events-none'
 						)}
 					/>
 					<div
@@ -45,7 +45,7 @@ function Home() {
 							'bg-gradient-to-br from-orange-200 to-red-200',
 							'dark:from-orange-700 dark:to-red-700',
 							'transform -rotate-1 rounded-2xl shdaow-xl z-10',
-							'group-hover:rotate-1 group-hover:scale-105 transition-transform'
+							'group-hover:rotate-1 group-hover:scale-105 transition-transform pointer-events-none'
 						)}
 					/>
 					<div
@@ -54,18 +54,20 @@ function Home() {
 							'bg-gradient-to-br from-orange-100 to-red-100',
 							'dark:from-orange-900 dark:to-red-900',
 							'transform rotate-3 rounded-2xl shdaow-xl z-0',
-							'group-hover:rotate-1 group-hover:scale-105 transition-transform'
+							'group-hover:rotate-1 group-hover:scale-105 transition-transform pointer-events-none'
 						)}
 					/>
 				</div>
 				{status === 'loading' && <Spinner />}
-				{status === 'success' && (
-					<div className="grid grid-cols-3 gap-8">
-						{paginatedProperties.data.map(property => (
-							<PropertyCard key={property.id} property={property} />
-						))}
-					</div>
-				)}
+				<div className="grid">
+					{status === 'success' && (
+						<div className="grid grid-cols-3 gap-8">
+							{paginatedProperties.data.map(property => (
+								<PropertyCard key={property.id} property={property} />
+							))}
+						</div>
+					)}
+				</div>
 			</Stack>
 		</div>
 	)
