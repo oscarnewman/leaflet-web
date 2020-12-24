@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^0.2.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "camelcase-keys": "^6.2.2",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
