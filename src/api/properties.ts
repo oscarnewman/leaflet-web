@@ -5,7 +5,7 @@ import { client } from './client'
 import { getPaginatedData } from './pagination'
 
 export interface PropertyQuery {
-	page: number
+	page?: number
 	bedrooms?: number
 	startDate?: Date
 	endDate?: Date
