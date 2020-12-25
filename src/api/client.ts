@@ -7,7 +7,9 @@ import { APIError, ClientError, ServerError } from './errors'
  */
 export const client = Axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+	withCredentials: true,
 })
+client.get('/sanctum/csrf-cookie')
 
 client.interceptors.response.use(
 	response => {

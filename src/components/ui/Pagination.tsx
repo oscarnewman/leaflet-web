@@ -7,7 +7,7 @@ type Props = {
 
 function Pagination({ data, onChangePage }: Props) {
 	return (
-		<div className="bg-white py-3 flex items-center justify-between border-t border-gray-200">
+		<div className="py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-800">
 			<div className="flex-1 flex justify-between sm:hidden">
 				<a
 					href="#"
@@ -24,7 +24,7 @@ function Pagination({ data, onChangePage }: Props) {
 			</div>
 			<div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
 				<div>
-					<p className="text-sm text-gray-700">
+					<p className="text-sm text-gray-700 dark:text-gray-300">
 						Showing{' '}
 						{data.total !== 0 && (
 							<>
