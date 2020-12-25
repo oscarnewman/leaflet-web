@@ -33,6 +33,7 @@ export default function DateRangeInput({ title, value, onChange }: Props) {
 		if (!startDate || !endDate) {
 			return ''
 		}
+
 		const start = format(startDate, 'MMM')
 		const end = format(endDate, 'MMM')
 
