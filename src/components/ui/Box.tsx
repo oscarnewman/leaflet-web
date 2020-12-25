@@ -1,5 +1,5 @@
 import { cx } from '@/utilities/classes'
-import { ReactNode } from 'react'
+import { forwardRef, ReactNode, RefObject } from 'react'
 
 type Props = {
 	[key: string]: any
@@ -11,16 +11,20 @@ type Props = {
 	justify?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'
 }
 
-function Box({
-	children,
-	className,
-	flex = 'col',
-	align = 'top',
-	justify = 'start',
-	...rest
-}: Props) {
+function Box(
+	{
+		children,
+		className,
+		flex = 'col',
+		align = 'top',
+		justify = 'start',
+		...rest
+	}: Props,
+	ref: RefObject<any>
+) {
 	return (
 		<div
+			ref={ref}
 			className={cx(
 				[`flex flex-${flex}`, `align-${align}`, `justify-${justify}`],
 				className
@@ -32,4 +36,4 @@ function Box({
 	)
 }
 
-export default Box
+export default forwardRef(Box)
