@@ -6,6 +6,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { format } from 'date-fns'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import InputGroup from './InputGroup'
+import InputContainer from './InputContainer'
+import TextField from './TextField'
+import { cx } from '@/utilities/classes'
+import Button from '../Button'
+import Icon from '../icons/Icon'
 
 export interface DateRange {
 	startDate: Date
@@ -46,30 +51,39 @@ export default function DateRangeInput({ title, value, onChange }: Props) {
 
 	return (
 		<InputGroup className="relative" title={title}>
-			<button
-				className="text-left block w-full group focus:outline-none ring-2 ring-transparent focus:ring-indigo-500 rounded-md"
-				onClick={() => setShowDatePicker(!showDatePicker)}
+			<InputContainer
+				cursor="pointer"
+				className="relative"
+				trailingSlot={
+					<div className={cx(formattedText ? 'block' : 'hidden')}>
+						<Icon icon="x-circle" className="w-4 text-gray-400" />
+					</div>
+				}
+				onClickTrailing={() => onChange({ startDate: null, endDate: null })}
 			>
-				<input
-					type="text"
-					disabled
-					className="form-input"
-					placeholder="Any time"
-					value={formattedText}
-				/>
-			</button>
-			{showDatePicker && (
-				<div ref={ref}>
-					<DateRangePicker
-						className="absolute z-10 shadow-xl border border-gray-300 rounded overflow-hidden"
-						editableDateInputs={true}
-						// @ts-ignore
-						onChange={item => onChange({ ...item.selection })}
-						moveRangeOnFirstSelection={false}
-						ranges={ranges}
-					/>
-				</div>
-			)}
+				<button
+					className={cx(
+						'w-full block border-none text-base focus:ring-transparent p-0 leading-6 text-left',
+						'focus:outline-none',
+						{ 'text-gray-500': !formattedText }
+					)}
+					onClick={() => setShowDatePicker(true)}
+				>
+					{formattedText || 'Any time'}
+				</button>
+				{showDatePicker && (
+					<div ref={ref}>
+						<DateRangePicker
+							className="absolute z-10 left-0 top-12 shadow-xl border border-gray-300 rounded overflow-hidden"
+							editableDateInputs={true}
+							// @ts-ignore
+							onChange={item => onChange({ ...item.selection })}
+							moveRangeOnFirstSelection={false}
+							ranges={ranges}
+						/>
+					</div>
+				)}
+			</InputContainer>
 		</InputGroup>
 	)
 }

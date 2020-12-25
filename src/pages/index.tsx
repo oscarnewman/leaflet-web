@@ -25,7 +25,7 @@ function Home() {
 		endDate: null,
 	})
 
-	const { data: paginatedProperties, status } = useQuery<
+	const { data: paginatedProperties, status, isFetching } = useQuery<
 		PaginatedResponse<Property>,
 		APIError
 	>(['properties', removeEmpty(query)], () => getProperties(query), {
@@ -78,7 +78,7 @@ function Home() {
 
 					<Stack>
 						<div>
-							<div className="grid grid-cols-4 gap-8 pb-4">
+							<div className="grid gap-4 md:grid-cols-4 md:gap-8 pb-4 ">
 								<TextField
 									title="Rooms"
 									name="bedrooms"
@@ -103,9 +103,11 @@ function Home() {
 									value={query.rentMin}
 									onChange={rentMin => setQuery({ ...query, rentMin })}
 									placeholder="0"
-									leadingSlot={<span className="text-sm text-gray-400">$</span>}
+									leadingSlot={
+										<span className="text-sm text-gray-400 pr-1">$</span>
+									}
 									trailingSlot={
-										<span className="text-sm text-gray-400">per month</span>
+										<span className="text-sm text-gray-400 pl-1">/month</span>
 									}
 								/>
 								<TextField
@@ -114,14 +116,17 @@ function Home() {
 									value={query.rentMax}
 									onChange={rentMax => setQuery({ ...query, rentMax })}
 									placeholder="Infinite"
-									leadingSlot={<span className="text-sm text-gray-400">$</span>}
+									leadingSlot={
+										<span className="text-sm text-gray-400 pr-1">$</span>
+									}
 									trailingSlot={
-										<span className="text-sm text-gray-400">per month</span>
+										<span className="text-sm text-gray-400 pl-1">/month</span>
 									}
 								/>
 							</div>
 							{paginatedProperties && (
 								<Pagination
+									loading={isFetching}
 									data={paginatedProperties}
 									onChangePage={page => setQuery({ ...query, page })}
 								/>

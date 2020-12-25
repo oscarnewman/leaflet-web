@@ -6,6 +6,7 @@ import {
 	CalendarIcon,
 	PlusCircleIcon,
 	ShoppingBagIcon,
+	XCircleIcon,
 } from '.'
 
 export const icons = {
@@ -15,6 +16,7 @@ export const icons = {
 	calendar: CalendarIcon,
 	'plus-circle': PlusCircleIcon,
 	'shopping-bag': ShoppingBagIcon,
+	'x-circle': XCircleIcon,
 }
 
 export type Props = StyleProps & {

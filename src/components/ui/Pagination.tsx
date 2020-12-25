@@ -1,11 +1,13 @@
 import { PaginatedResponse } from '@/types/api'
+import Spinner from './Spinner'
 
 type Props = {
 	data: PaginatedResponse<any>
 	onChangePage: (page: number) => void
+	loading?: boolean
 }
 
-function Pagination({ data, onChangePage }: Props) {
+function Pagination({ data, onChangePage, loading = false }: Props) {
 	return (
 		<div className="py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-800">
 			<div className="flex-1 flex justify-between sm:hidden">
@@ -35,7 +37,8 @@ function Pagination({ data, onChangePage }: Props) {
 						<span className="font-medium">{data.total}</span> results
 					</p>
 				</div>
-				<div>
+				<div className="flex items-center">
+					<div className="mr-4">{loading && <Spinner />}</div>
 					<nav
 						className="relative z-0 inline-flex shadow-sm -space-x-px"
 						aria-label="Pagination"
