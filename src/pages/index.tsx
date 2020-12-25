@@ -10,6 +10,7 @@ import Stack from '@/components/ui/Stack'
 import { PaginatedResponse } from '@/types/api'
 import { Property } from '@/types/property'
 import { cx } from '@/utilities/classes'
+import { removeEmpty } from '@/utilities/objects'
 import { spawn } from 'child_process'
 import { useState } from 'react'
 import { QueryClient, useQuery } from 'react-query'
@@ -28,7 +29,7 @@ function Home() {
 	const { data: paginatedProperties, status } = useQuery<
 		PaginatedResponse<Property>,
 		APIError
-	>(['properties', query], () => getProperties(query), {
+	>(['properties', removeEmpty(query)], () => getProperties(query), {
 		keepPreviousData: true,
 	})
 
@@ -145,7 +146,9 @@ function Home() {
 
 export async function getStaticProps() {
 	const queryClient = new QueryClient()
-	await queryClient.prefetchQuery(['properties', {}], () => getProperties())
+	await queryClient.prefetchQuery(['properties', { page: 1 }], () =>
+		getProperties()
+	)
 
 	return {
 		props: {
