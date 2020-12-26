@@ -134,7 +134,7 @@ function Home() {
 						</div>
 						<div className="grid">
 							{status === 'success' && (
-								<div className="grid grid-cols-3 gap-8">
+								<div className="grid gap-4 md:grid-cols-3 md:gap-8">
 									{paginatedProperties.data.map(property => (
 										<PropertyCard key={property.id} property={property} />
 									))}

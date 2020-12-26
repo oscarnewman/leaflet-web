@@ -23,7 +23,7 @@ function TextField({
 		<InputGroup title={title}>
 			<InputContainer {...affixSlotProps}>
 				<input
-					className="w-full border-none focus:ring-transparent p-0"
+					className="w-full border-none bg-transparent focus:ring-transparent p-0"
 					onChange={e => onChange && onChange(e.target.value)}
 					type={type}
 					value={value}
