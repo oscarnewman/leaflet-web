@@ -1,7 +1,10 @@
 import ImageDropzone from '@/components/form/ImageDropzone'
 import TextInput from '@/components/form/TextInput'
 import BaseLayout from '@/components/layout/BaseLayout'
+import PropertyDetails from '@/components/PropertyDetails'
 import PrimaryButton from '@/components/ui/Button/PrimaryButton'
+import { ArrowRightIcon } from '@/components/ui/icons'
+import TextField from '@/components/ui/input/TextField'
 import Stack from '@/components/ui/Stack'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -26,31 +29,59 @@ function NewPropertyPage(props: Props) {
 				initialValues={{
 					bedrooms: '',
 					area: '',
+					rent: '',
 				}}
 				onSubmit={handleSubmit}
 				validationSchema={Yup.object({
-					bedrooms: Yup.number().min(1).max(20).required(),
+					bedrooms: Yup.number()
+						.integer()
+						.min(1)
+						.max(20)
+						.required('Required')
+						.typeError('Must be a whole number'),
 					area: Yup.string().max(100).required(),
+					rent: Yup.number().min(100).max(10000).required(),
 				})}
 				validateOnBlur
 			>
-				<Form>
-					<Stack space={6}>
-						<ImageDropzone />
-						<TextInput
-							title="Bedrooms"
-							type="number"
-							name="bedrooms"
-							placeholder="Probably a few"
-						/>
-						<TextInput
-							title="Area"
-							placeholder="i.e. Governor Street"
-							name="area"
-						/>
-						<PrimaryButton type="submit">Post</PrimaryButton>
-					</Stack>
-				</Form>
+				{({ getFieldProps, setFieldValue, errors }) => (
+					<Form>
+						<Stack space={6}>
+							<ImageDropzone />
+							<TextField
+								title="Bedrooms"
+								name="bedrooms"
+								placeholder="Probably a few"
+								{...getFieldProps('bedrooms')}
+								onChange={value => setFieldValue('bedrooms', value)}
+								error={errors.bedrooms}
+							/>
+							<TextField
+								title="Area"
+								name="area"
+								placeholder="i.e. Governor St"
+								{...getFieldProps('area')}
+							/>
+							<TextField
+								leadingSlot={
+									<span className="text-gray-400 mr-2 font-medium">$</span>
+								}
+								title="Rent"
+								name="rent"
+								placeholder="Per month"
+								type="number"
+								{...getFieldProps('rent')}
+							/>
+
+							<PrimaryButton
+								type="submit"
+								trailingIcon={<ArrowRightIcon className="w-6" />}
+							>
+								Find Subletters
+							</PrimaryButton>
+						</Stack>
+					</Form>
+				)}
 			</Formik>
 		</BaseLayout>
 	)

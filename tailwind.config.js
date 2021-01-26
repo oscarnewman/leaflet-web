@@ -1,6 +1,6 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
-	darkMode: 'media',
+	darkMode: false,
 	future: {
 		removeDeprecatedGapUtilities: true,
 		purgeLayersByDefault: true,
@@ -84,10 +84,13 @@ module.exports = {
 		}),
 	},
 	variants: {
-		borderWidth: ['hover'],
-		rotate: ['hover', 'group-hover'],
-		scale: ['hover', 'group-hover'],
-		typography: ['dark'],
+		extend: {
+			backgroundColor: ['active'],
+			borderWidth: ['hover'],
+			rotate: ['hover', 'group-hover'],
+			scale: ['hover', 'group-hover'],
+			typography: ['dark'],
+		},
 	},
 	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

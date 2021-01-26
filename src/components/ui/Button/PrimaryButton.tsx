@@ -10,8 +10,9 @@ function PrimaryButton({ children, className, ...rest }: Props) {
 	return (
 		<Button
 			className={cx(
-				'rounded bg-teal-400 text-white focus:outline-none transition-shadow duration-75',
-				'ring-2 ring-offset-2 ring-offset-transparent focus:ring-offset-white ring-transparent focus:ring-teal-400',
+				'rounded bg-purple-500 text-white focus:outline-none',
+				'ring-2 ring-offset-2 ring-offset-transparent focus:ring-offset-white ring-transparent focus:ring-purple-400',
+				'hover:bg-purple-600 active:bg-purple-700 transition-all',
 				className
 			)}
 			spinnerClass="text-gray-200"

@@ -8,6 +8,7 @@ type Props = AffixSlotProps & {
 	onChange?: (value: string) => void
 	value?: any
 	placeholder?: string
+	error?: string
 }
 
 function TextField({
@@ -16,6 +17,7 @@ function TextField({
 	value,
 	placeholder,
 	name,
+	error,
 	onChange,
 	...affixSlotProps
 }: Props) {
@@ -31,6 +33,7 @@ function TextField({
 					placeholder={placeholder}
 				/>
 			</InputContainer>
+			{error && <p className="text-red-600 text-sm mt-1">{error}</p>}
 		</InputGroup>
 	)
 }
