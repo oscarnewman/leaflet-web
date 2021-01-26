@@ -1,7 +1,5 @@
 import ImageDropzone from '@/components/form/ImageDropzone'
-import TextInput from '@/components/form/TextInput'
 import BaseLayout from '@/components/layout/BaseLayout'
-import PropertyDetails from '@/components/PropertyDetails'
 import PrimaryButton from '@/components/ui/Button/PrimaryButton'
 import { ArrowRightIcon } from '@/components/ui/icons'
 import TextField from '@/components/ui/input/TextField'
@@ -54,7 +52,6 @@ function NewPropertyPage(props: Props) {
 								placeholder="Probably a few"
 								{...getFieldProps('bedrooms')}
 								onChange={value => setFieldValue('bedrooms', value)}
-								error={errors.bedrooms}
 							/>
 							<TextField
 								title="Area"
