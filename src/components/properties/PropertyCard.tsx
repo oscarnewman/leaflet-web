@@ -1,10 +1,13 @@
 import { Property } from '@/types/property'
+import { StyleProps } from '@/utilities/styleProps'
 import { format, parseISO } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
 import Icon from '../ui/icons/Icon'
+import { PlaceholderImage } from './PlaceholderPropertyImage'
 
 type Props = {
+	/** The property to display */
 	property: Property
 }
 
@@ -14,19 +17,25 @@ type Props = {
 function PropertyCard({ property }: Props) {
 	return (
 		<Link href={`/property/${property.id}`}>
-			<a className="rounded-lg overflow-hidden border-black border-2 h-full flex flex-col justify-between">
+			<a className="rounded-lg overflow-hidden border-black border-2 dark:border-gray-800 dark:bg-gray-800 h-full flex flex-col justify-between">
 				<div>
 					<div className="w-full h-48 relative">
-						<Image
-							src={property.image}
-							layout="fill"
-							className="object-cover"
-							priority
-							sizes="(max-width: 3000px) 250px"
-						/>
+						{property.featuredImage ? (
+							<Image
+								src={property.featuredImage.url}
+								layout="fill"
+								className="object-cover"
+								priority
+								sizes="(max-width: 3000px) 250px"
+							/>
+						) : (
+							<div className="w-full h-full grid place-content-center">
+								<PlaceholderImage className="w-full h-full p-12" />
+							</div>
+						)}
 					</div>
 					<div className="p-4">
-						<div className="flex text-gray-600 text-sm mb-2 space-x-4">
+						<div className="flex text-gray-600 dark:text-gray-400 text-sm mb-2 space-x-4">
 							<p className="flex items-center space-x-2">
 								<Icon icon="calendar" className="w-4" />
 								<span>
@@ -35,7 +44,7 @@ function PropertyCard({ property }: Props) {
 								</span>
 							</p>
 						</div>
-						<p className="font-bold text-lg leading-tight mb-2">
+						<p className="font-bold text-lg leading-tight mb-2 dark:text-gray-50">
 							{property.bedrooms}{' '}
 							{property.bedrooms === 1 ? 'bedroom' : 'bedrooms'} near{' '}
 							{property.area}

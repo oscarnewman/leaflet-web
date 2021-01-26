@@ -10,3 +10,12 @@
 	--theme-tertiary: theme('colors.yellow.100');
 }
 
+body,
+html,
+#__next {
+}
+
+#__next {
+	position: relastive;
+	overflow-x: hidden;
+}
